@@ -162,31 +162,43 @@ flowchart TD
 
 ## 데이터 흐름 요약
 
-```
-학습 시뮬레이터                        검증 시뮬레이터
-─────────────                        ────────────
-MuJoCo / Isaac Lab                   AGX Dynamics + UE5
-       │                                    │
-       ▼                                    ▼
-  정책 (.pt/.onnx)  ───────────▶  정책 로드 및 실행
-                                           │
-                                           ▼
-                                   물리 + 센서 데이터
-                                           │
-                                           ▼
-                                      검증 메트릭
-                                           │
-                          ┌────────────────┼────────────────┐
-                          ▼                ▼                ▼
-                       ✅ 통과        🔄 경계           ❌ 실패
-                          │                │                │
-                          ▼                ▼                ▼
-                     HW 배포       타깃 재학습         새 시나리오
-                                           │                │
-                                           └────────────────┘
-                                                  │
-                                                  ▼
-                                            학습으로 복귀
+```mermaid
+flowchart TD
+    subgraph TrainingSim["학습 시뮬레이터"]
+        TS["MuJoCo / Isaac Lab"]
+        TS --> Policy["정책 (.pt/.onnx)"]
+    end
+
+    subgraph ValidationSim["검증 시뮬레이터"]
+        VS["AGX Dynamics + UE5"]
+        VS --> Load["정책 로드 및 실행"]
+        Load --> PhysData["물리 + 센서 데이터"]
+        PhysData --> Metrics["검증 메트릭"]
+    end
+
+    subgraph Results["검증 결과"]
+        Pass["✅ 통과"]
+        Marginal["🔄 경계"]
+        Fail["❌ 실패"]
+    end
+
+    subgraph Actions["후속 조치"]
+        Deploy["HW 배포"]
+        Retrain["타깃 재학습"]
+        NewScenario["새 시나리오"]
+    end
+
+    Policy --> Load
+    Metrics --> Pass
+    Metrics --> Marginal
+    Metrics --> Fail
+
+    Pass --> Deploy
+    Marginal --> Retrain
+    Fail --> NewScenario
+
+    Retrain --> TS
+    NewScenario --> TS
 ```
 
 ## 기술 선택 근거

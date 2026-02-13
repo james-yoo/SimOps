@@ -14,29 +14,33 @@
 
 SimOps는 명확한 **관심사 분리(Separation of Concerns)**를 도입합니다:
 
-```
-┌─────────────────────────────────────────────────┐
-│                  SimOps 파이프라인                 │
-│                                                  │
-│  ┌──────────────┐       ┌───────────────────┐   │
-│  │    학습       │       │      검증          │   │
-│  │  시뮬레이터   │──────▶│    시뮬레이터      │   │
-│  │              │       │                    │   │
-│  │  • 속도      │       │  • 물리 충실도     │   │
-│  │  • 규모      │       │  • 접촉 물리       │   │
-│  │  • 병렬화    │       │  • 센서 모델       │   │
-│  │              │       │                    │   │
-│  │  MuJoCo /    │       │  AGX Dynamics +    │   │
-│  │  Isaac Lab   │       │  Unreal Engine 5   │   │
-│  └──────────────┘       └────────┬──────────┘   │
-│                                  │               │
-│         ┌────────────────────────┘               │
-│         ▼                                        │
-│  ┌──────────────┐                                │
-│  │   피드백      │  검증 결과가 학습 설정에       │
-│  │   루프        │  자동으로 반영                 │
-│  └──────────────┘                                │
-└─────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph Pipeline["SimOps 파이프라인"]
+        direction LR
+
+        subgraph Training["학습 시뮬레이터"]
+            direction TB
+            T1["• 속도<br/>• 규모<br/>• 병렬화"]
+            T2["MuJoCo /<br/>Isaac Lab"]
+            T1 --- T2
+        end
+
+        subgraph Validation["검증 시뮬레이터"]
+            direction TB
+            V1["• 물리 충실도<br/>• 접촉 물리<br/>• 센서 모델"]
+            V2["AGX Dynamics +<br/>Unreal Engine 5"]
+            V1 --- V2
+        end
+
+        subgraph Feedback["피드백 루프"]
+            F1["검증 결과가 학습 설정에<br/>자동으로 반영"]
+        end
+
+        Training -->|정책 전달| Validation
+        Validation -->|검증 결과| Feedback
+        Feedback -->|재학습| Training
+    end
 ```
 
 ### 학습 시뮬레이터 — 정책 생산

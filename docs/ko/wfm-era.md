@@ -62,11 +62,18 @@ flowchart LR
 
 WFM이 하루 1개 대신 시간당 100개의 후보 정책을 생성할 수 있다면, 검증 병목이 크리티컬 패스가 됩니다. SimOps가 이 병목을 자동화합니다:
 
-```
-전통적:    1 정책/일    → 수동 검증 가능
-WFM 시대:  100 정책/시간 → 자동화된 검증 필수
-                                ↑
-                          SimOps가 해결
+```mermaid
+flowchart LR
+    subgraph Traditional["전통적"]
+        T1["1 정책/일"] --> T2["수동 검증 가능"]
+    end
+
+    subgraph WFM["WFM 시대"]
+        W1["100 정책/시간"] --> W2["자동화된 검증 필수"]
+        W2 -.->|"해결"| SimOps["SimOps"]
+    end
+
+    style SimOps fill:#90EE90,stroke:#333,stroke-width:2px
 ```
 
 #### 3. 규제 및 안전 요구사항은 사라지지 않는다

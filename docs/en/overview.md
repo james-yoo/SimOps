@@ -14,29 +14,33 @@ Today, most teams use a single simulator for both purposes — or skip validatio
 
 SimOps introduces a clear separation of concerns:
 
-```
-┌─────────────────────────────────────────────────┐
-│                   SimOps Pipeline                │
-│                                                  │
-│  ┌──────────────┐       ┌───────────────────┐   │
-│  │   Training    │       │    Validation      │   │
-│  │  Simulator    │──────▶│    Simulator       │   │
-│  │              │       │                    │   │
-│  │  • Speed     │       │  • Fidelity        │   │
-│  │  • Scale     │       │  • Contact physics │   │
-│  │  • Parallel  │       │  • Sensor models   │   │
-│  │              │       │                    │   │
-│  │  MuJoCo /    │       │  AGX Dynamics +    │   │
-│  │  Isaac Lab   │       │  Unreal Engine 5   │   │
-│  └──────────────┘       └────────┬──────────┘   │
-│                                  │               │
-│         ┌────────────────────────┘               │
-│         ▼                                        │
-│  ┌──────────────┐                                │
-│  │  Feedback     │  Validation results feed      │
-│  │  Loop         │  back into training config    │
-│  └──────────────┘                                │
-└─────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph Pipeline["SimOps Pipeline"]
+        direction LR
+
+        subgraph Training["Training Simulator"]
+            direction TB
+            T1["• Speed<br/>• Scale<br/>• Parallel"]
+            T2["MuJoCo /<br/>Isaac Lab"]
+            T1 --- T2
+        end
+
+        subgraph Validation["Validation Simulator"]
+            direction TB
+            V1["• Fidelity<br/>• Contact physics<br/>• Sensor models"]
+            V2["AGX Dynamics +<br/>Unreal Engine 5"]
+            V1 --- V2
+        end
+
+        subgraph Feedback["Feedback Loop"]
+            F1["Validation results feed<br/>back into training config"]
+        end
+
+        Training -->|Policy Transfer| Validation
+        Validation -->|Validation Results| Feedback
+        Feedback -->|Re-training| Training
+    end
 ```
 
 ### Training Simulator — Policy Production

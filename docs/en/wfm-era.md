@@ -62,11 +62,18 @@ Traditional RL policies are trained in a physics simulator with explicit reward 
 
 If a WFM can generate 100 candidate policies per hour instead of 1 per day, the validation bottleneck becomes the critical path. SimOps automates this bottleneck:
 
-```
-Traditional:  1 policy/day   → Manual validation feasible
-WFM Era:      100 policies/hr → Automated validation required
-                                        ↑
-                                   SimOps solves this
+```mermaid
+flowchart LR
+    subgraph Traditional["Traditional"]
+        T1["1 policy/day"] --> T2["Manual validation feasible"]
+    end
+
+    subgraph WFM["WFM Era"]
+        W1["100 policies/hr"] --> W2["Automated validation required"]
+        W2 -.->|"solves this"| SimOps["SimOps"]
+    end
+
+    style SimOps fill:#90EE90,stroke:#333,stroke-width:2px
 ```
 
 #### 3. Regulatory and Safety Requirements Don't Disappear

@@ -162,31 +162,43 @@ When a policy fails validation, the failure analyzer produces:
 
 ## Data Flow Summary
 
-```
-Training Simulator                    Validation Simulator
-─────────────────                    ────────────────────
-MuJoCo / Isaac Lab                   AGX Dynamics + UE5
-       │                                    │
-       ▼                                    ▼
-  Policy (.pt/.onnx)  ──────────▶  Load & Execute Policy
-                                           │
-                                           ▼
-                                   Physics + Sensor Data
-                                           │
-                                           ▼
-                                   Validation Metrics
-                                           │
-                          ┌────────────────┼────────────────┐
-                          ▼                ▼                ▼
-                       ✅ Pass        🔄 Marginal       ❌ Fail
-                          │                │                │
-                          ▼                ▼                ▼
-                     Deploy to HW    Re-train (targeted)  New scenarios
-                                           │                │
-                                           └────────────────┘
-                                                  │
-                                                  ▼
-                                          Back to Training
+```mermaid
+flowchart TD
+    subgraph TrainingSim["Training Simulator"]
+        TS["MuJoCo / Isaac Lab"]
+        TS --> Policy["Policy (.pt/.onnx)"]
+    end
+
+    subgraph ValidationSim["Validation Simulator"]
+        VS["AGX Dynamics + UE5"]
+        VS --> Load["Load & Execute Policy"]
+        Load --> PhysData["Physics + Sensor Data"]
+        PhysData --> Metrics["Validation Metrics"]
+    end
+
+    subgraph Results["Validation Results"]
+        Pass["✅ Pass"]
+        Marginal["🔄 Marginal"]
+        Fail["❌ Fail"]
+    end
+
+    subgraph Actions["Follow-up Actions"]
+        Deploy["Deploy to HW"]
+        Retrain["Re-train (targeted)"]
+        NewScenario["New scenarios"]
+    end
+
+    Policy --> Load
+    Metrics --> Pass
+    Metrics --> Marginal
+    Metrics --> Fail
+
+    Pass --> Deploy
+    Marginal --> Retrain
+    Fail --> NewScenario
+
+    Retrain --> TS
+    NewScenario --> TS
 ```
 
 ## Technology Decision Rationale
