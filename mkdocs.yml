@@ -1,0 +1,81 @@
+site_name: SimOps
+site_description: "SimOps — Simulation Operations for Robotics"
+site_url: https://james-yoo.github.io/simops/  # ← GitHub 유저네임으로 변경
+
+theme:
+  name: material
+  language: en
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - content.tabs.link
+    - toc.follow
+    - search.suggest
+    - search.highlight
+  icon:
+    repo: fontawesome/brands/github
+
+# i18n via tabs — English and Korean sections side by side
+nav:
+  - Home: index.md
+  - English:
+    - Overview: en/overview.md
+    - Architecture: en/architecture.md
+    - SimOps in the WFM Era: en/wfm-era.md
+  - 한국어:
+    - 개요: ko/overview.md
+    - 아키텍처: ko/architecture.md
+    - WFM 시대의 SimOps: ko/wfm-era.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+  - tables
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+plugins:
+  - search
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/your-org/simops  # Update
+  generator: false
+
+copyright: Copyright &copy; 2026 SimOps
