@@ -1,0 +1,1525 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="SimOps — Simulation Operations for Robotics">
+      
+      
+      
+        <link rel="canonical" href="https://james-yoo.github.io/simops/ko/curriculum-hardening/">
+      
+      
+        <link rel="prev" href="../sim2real-gap/">
+      
+      
+        <link rel="next" href="../wfm-era/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>커리큘럼 & 경화 - SimOps</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="SimOps" class="md-header__button md-logo" aria-label="SimOps" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SimOps
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              커리큘럼 & 경화
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../en/overview/" class="md-tabs__link">
+          
+  
+  
+  English
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../overview/" class="md-tabs__link">
+          
+  
+  
+  한국어
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SimOps" class="md-nav__button md-logo" aria-label="SimOps" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SimOps
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/sim2real-gap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sim-to-Real Gap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/curriculum-hardening/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curriculum & Hardening
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/wfm-era/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SimOps in the WFM Era
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    한국어
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    한국어
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개요
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    아키텍처
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sim2real-gap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sim-to-Real 갭 정량화
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    커리큘럼 & 경화
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    커리큘럼 & 경화
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#passfail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pass/Fail을 넘어서
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        커리큘럼 학습이란?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="커리큘럼 학습이란?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        커리큘럼 차원
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#progressive-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        점진적 경화 (Progressive Hardening)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="점진적 경화 (Progressive Hardening)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        경화 그래디언트
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        자동 피드백 루프 상세
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="자동 피드백 루프 상세">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        검증 실패에서 학습 신호까지
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        실패 분류 체계
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        수렴 모니터링
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="수렴 모니터링">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        수렴 기준
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vs-simops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        비교: 수동 vs SimOps 경화
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wfm-era/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WFM 시대의 SimOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#passfail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pass/Fail을 넘어서
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        커리큘럼 학습이란?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="커리큘럼 학습이란?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        커리큘럼 차원
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#progressive-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        점진적 경화 (Progressive Hardening)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="점진적 경화 (Progressive Hardening)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        경화 그래디언트
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        자동 피드백 루프 상세
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="자동 피드백 루프 상세">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        검증 실패에서 학습 신호까지
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        실패 분류 체계
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        수렴 모니터링
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="수렴 모니터링">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        수렴 기준
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vs-simops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        비교: 수동 vs SimOps 경화
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">커리큘럼 학습 &amp; 점진적 경화<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="passfail">Pass/Fail을 넘어서<a class="headerlink" href="#passfail" title="Permanent link">&para;</a></h2>
+<p>단순한 검증 파이프라인은 이렇게만 묻습니다: <strong>정책이 통과했는가, 실패했는가?</strong> SimOps는 더 나아갑니다. 폐루프 피드백이 구조화된 학습 신호를 생성하여, <strong>커리큘럼 학습</strong>과 <strong>점진적 경화(Progressive Hardening)</strong>를 통해 자동으로 정책을 정제합니다.</p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph Naive["❌ 단순 접근법"]
+        N1["학습"] --&gt; N2["검증"]
+        N2 --&gt;|통과| N3["배포"]
+        N2 --&gt;|실패| N4["처음부터&lt;br/&gt;재학습"]
+    end
+
+    subgraph SimOps["✅ SimOps 접근법"]
+        S1["학습"] --&gt; S2["검증"]
+        S2 --&gt;|통과| S3["배포"]
+        S2 --&gt;|실패| S4["실패 분석"]
+        S4 --&gt; S5["커리큘럼&lt;br/&gt;자동 조정"]
+        S5 --&gt; S1
+    end</code></pre>
+<h2 id="_2">커리큘럼 학습이란?<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>커리큘럼 학습은 학습 과정을 <strong>쉬운 것에서 어려운 것으로</strong> 구조화합니다. 인간의 학습 방식과 동일합니다. 처음부터 태스크의 전체 복잡성을 에이전트에게 던지는 대신, 학습 환경이 점진적으로 난이도를 높입니다.</p>
+<p>SimOps에서 이 커리큘럼은 <strong>수동으로 설계되지 않습니다</strong> — 검증 피드백으로부터 <strong>자동 생성</strong>됩니다.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph CL["자동 커리큘럼 파이프라인"]
+        V["🔬 검증 결과"] --&gt; FA["📋 실패 분석"]
+        FA --&gt; FC["🏷️ 실패 분류"]
+        FC --&gt; CG["📐 커리큘럼 생성기"]
+        CG --&gt; L1["단계 1: 정상 조건"]
+        CG --&gt; L2["단계 2: 경미한 섭동"]
+        CG --&gt; L3["단계 3: 엣지 케이스"]
+        CG --&gt; L4["단계 4: 적대적 시나리오"]
+        L1 --&gt; TR["🏋️ 학습 시뮬레이터"]
+        L2 --&gt; TR
+        L3 --&gt; TR
+        L4 --&gt; TR
+    end</code></pre>
+<h3 id="_3">커리큘럼 차원<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>커리큘럼은 여러 축을 동시에 조정합니다:</p>
+<table>
+<thead>
+<tr>
+<th>차원</th>
+<th>쉬움 → 어려움</th>
+<th>예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>물리 섭동</strong></td>
+<td>명목 파라미터</td>
+<td>±30% 질량, 마찰, 감쇠</td>
+</tr>
+<tr>
+<td><strong>센서 노이즈</strong></td>
+<td>깨끗한 신호</td>
+<td>현실적 노이즈 + 드롭아웃</td>
+</tr>
+<tr>
+<td><strong>태스크 복잡도</strong></td>
+<td>정적 타깃</td>
+<td>이동, 가속하는 타깃</td>
+</tr>
+<tr>
+<td><strong>환경 변화</strong></td>
+<td>단일 환경</td>
+<td>랜덤화된 조명, 장애물</td>
+</tr>
+<tr>
+<td><strong>시간 압박</strong></td>
+<td>여유 있는 마감</td>
+<td>실시간 제약</td>
+</tr>
+<tr>
+<td><strong>실패 복구</strong></td>
+<td>방해 없음</td>
+<td>외부 충격, 센서 고장</td>
+</tr>
+</tbody>
+</table>
+<h2 id="progressive-hardening">점진적 경화 (Progressive Hardening)<a class="headerlink" href="#progressive-hardening" title="Permanent link">&para;</a></h2>
+<p>점진적 경화는 반복적인 검증-학습 사이클을 통해 정책이 <strong>점점 더 강건해지는</strong> 과정입니다. 각 사이클은 새로운 약점을 노출하고, 다음 학습 라운드에서 이를 해결합니다.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph Cycle1["사이클 1: 기본 역량"]
+        C1T["정상 조건에서&lt;br/&gt;학습"]
+        C1V["검증"]
+        C1R["결과: 70% 통과&lt;br/&gt;빠른 타깃에서 실패"]
+        C1T --&gt; C1V --&gt; C1R
+    end
+
+    subgraph Cycle2["사이클 2: 속도 강건성"]
+        C2T["확장된 속도 범위로&lt;br/&gt;학습"]
+        C2V["검증"]
+        C2R["결과: 85% 통과&lt;br/&gt;센서 노이즈에서 실패"]
+        C2T --&gt; C2V --&gt; C2R
+    end
+
+    subgraph Cycle3["사이클 3: 센서 강건성"]
+        C3T["현실적 센서&lt;br/&gt;아티팩트로 학습"]
+        C3V["검증"]
+        C3R["결과: 93% 통과&lt;br/&gt;엣지 접촉에서 실패"]
+        C3T --&gt; C3V --&gt; C3R
+    end
+
+    subgraph Cycle4["사이클 4: 접촉 강건성"]
+        C4T["다양한 접촉&lt;br/&gt;시나리오로 학습"]
+        C4V["검증"]
+        C4R["결과: 97% 통과 ✅&lt;br/&gt;하드웨어 준비 완료"]
+        C4T --&gt; C4V --&gt; C4R
+    end
+
+    Cycle1 --&gt; Cycle2 --&gt; Cycle3 --&gt; Cycle4</code></pre>
+<h3 id="_4">경화 그래디언트<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>각 경화 사이클은 특정 <strong>피드백 레벨</strong>에서 작동합니다:</p>
+<pre class="mermaid"><code>graph BT
+    subgraph Levels["피드백 레벨"]
+        L1["레벨 1: 보상 조정&lt;br/&gt;━━━━━━━━━━━━━━━━━━━&lt;br/&gt;어떤 실패 모드가 지배적인지에&lt;br/&gt;따라 보상 가중치 수정"]
+        L2["레벨 2: 도메인 랜덤화&lt;br/&gt;━━━━━━━━━━━━━━━━━━━&lt;br/&gt;검증에서 취약성을 발견한&lt;br/&gt;파라미터 범위 확장"]
+        L3["레벨 3: 시나리오 주입&lt;br/&gt;━━━━━━━━━━━━━━━━━━━&lt;br/&gt;특정 실패 시나리오를&lt;br/&gt;학습 환경으로 추가"]
+        L4["레벨 4: 아키텍처 적응&lt;br/&gt;━━━━━━━━━━━━━━━━━━━&lt;br/&gt;정책 용량이 부족할 때&lt;br/&gt;네트워크 아키텍처 변경 제안"]
+    end
+
+    L1 --&gt; L2 --&gt; L3 --&gt; L4</code></pre>
+<table>
+<thead>
+<tr>
+<th>레벨</th>
+<th>트리거</th>
+<th>액션</th>
+<th>영향</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. 보상 조정</strong></td>
+<td>일관된 실패 패턴</td>
+<td>보상 구성요소 재가중</td>
+<td>낮음 — 가장 빠른 반복</td>
+</tr>
+<tr>
+<td><strong>2. 도메인 랜덤화</strong></td>
+<td>파라미터 경계에서 취약</td>
+<td>랜덤화 범위 확장</td>
+<td>중간 — 넓은 커버리지</td>
+</tr>
+<tr>
+<td><strong>3. 시나리오 주입</strong></td>
+<td>특정 실패 모드</td>
+<td>타깃 학습 시나리오 추가</td>
+<td>높음 — 근본 원인 해결</td>
+</tr>
+<tr>
+<td><strong>4. 아키텍처 적응</strong></td>
+<td>정책 용량 소진</td>
+<td>네트워크 크기/구조 수정</td>
+<td>최고 — 근본적 변화</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_5">자동 피드백 루프 상세<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="_6">검증 실패에서 학습 신호까지<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>sequenceDiagram
+    participant VS as 🔬 검증 시뮬
+    participant FA as 📋 실패 분석기
+    participant CG as 📐 커리큘럼 생성기
+    participant TS as 🏋️ 학습 시뮬
+
+    VS-&gt;&gt;FA: 검증 결과 + 텔레메트리
+    FA-&gt;&gt;FA: 실패 모드 분류
+    FA-&gt;&gt;FA: 심각도 점수 계산
+    FA-&gt;&gt;CG: 실패 리포트 + 근본 원인
+
+    CG-&gt;&gt;CG: 피드백 레벨 결정
+    CG-&gt;&gt;CG: 커리큘럼 업데이트 생성
+
+    alt 레벨 1: 보상
+        CG-&gt;&gt;TS: 업데이트된 보상 가중치
+    else 레벨 2: 랜덤화
+        CG-&gt;&gt;TS: 확장된 DR 파라미터
+    else 레벨 3: 시나리오
+        CG-&gt;&gt;TS: 새 학습 시나리오
+    else 레벨 4: 아키텍처
+        CG-&gt;&gt;TS: 아키텍처 권장사항
+    end
+
+    TS-&gt;&gt;TS: 업데이트로 학습 재개
+    TS-&gt;&gt;VS: 새 정책 후보</code></pre>
+<h3 id="_7">실패 분류 체계<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>실패 분석기는 각 실패를 구조화된 분류 체계로 카테고리화합니다:</p>
+<table>
+<thead>
+<tr>
+<th>카테고리</th>
+<th>하위 분류</th>
+<th>일반적 피드백 레벨</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>기구학적 실패</strong></td>
+<td>관절 한계, 작업 공간 경계, 특이점</td>
+<td>레벨 1–2</td>
+</tr>
+<tr>
+<td><strong>동역학적 실패</strong></td>
+<td>균형 상실, 과도한 힘, 속도 한계</td>
+<td>레벨 2–3</td>
+</tr>
+<tr>
+<td><strong>접촉 실패</strong></td>
+<td>접촉 실패, 미끄러짐, 의도치 않은 충돌</td>
+<td>레벨 2–3</td>
+</tr>
+<tr>
+<td><strong>인지 실패</strong></td>
+<td>객체 미검출, 깊이 오차, 레이턴시</td>
+<td>레벨 2–3</td>
+</tr>
+<tr>
+<td><strong>계획 실패</strong></td>
+<td>비최적 궤적, 타이밍 오류</td>
+<td>레벨 1–3</td>
+</tr>
+<tr>
+<td><strong>일반화 실패</strong></td>
+<td>학습 분포에서 작동, 외부에서 실패</td>
+<td>레벨 3–4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_8">수렴 모니터링<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p>SimOps는 경화 진행 상황을 추적하여 수렴을 감지하고 수익 체감점을 식별합니다:</p>
+<pre class="mermaid"><code>graph LR
+    subgraph Monitoring["수렴 대시보드"]
+        direction TB
+        M1["📈 사이클별 통과율 추세"]
+        M2["📊 실패 모드 분포 변화"]
+        M3["🎯 갭 메트릭 수렴"]
+        M4["⏱️ 사이클당 학습 효율"]
+        M5["🔄 새 실패 발견율"]
+    end</code></pre>
+<h3 id="_9">수렴 기준<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>정책이 <strong>경화 완료</strong>로 간주되는 조건:</p>
+<ol>
+<li><strong>통과율</strong>이 모든 시나리오 카테고리에서 목표 임계값(예: &gt; 95%) 초과</li>
+<li>최근 N회 검증 실행에서 <strong>새 실패 모드 미발견</strong></li>
+<li><strong>갭 메트릭</strong>이 바운드된 허용 범위 내 (참조: <a href="../sim2real-gap/">Sim-to-Real 갭 정량화</a>)</li>
+<li><strong>사이클당 한계 개선</strong>이 효율 임계값 이하로 하락</li>
+</ol>
+<div class="admonition success">
+<p class="admonition-title">핵심 통찰</p>
+<p>점진적 경화는 검증을 <strong>이진 게이트</strong>에서 <strong>지속적 개선 엔진</strong>으로 변환합니다. 각 실패가 다음 정책을 더 강하게 만들고, 시스템은 수렴 시점을 알고 있습니다.</p>
+</div>
+<h2 id="vs-simops">비교: 수동 vs SimOps 경화<a class="headerlink" href="#vs-simops" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>측면</th>
+<th>수동 접근법</th>
+<th>SimOps 자동화</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>실패 분석</td>
+<td>엔지니어가 로그 검토</td>
+<td>자동 분류</td>
+</tr>
+<tr>
+<td>커리큘럼 설계</td>
+<td>수작업 난이도 레벨</td>
+<td>실패로부터 자동 생성</td>
+</tr>
+<tr>
+<td>피드백 속도</td>
+<td>수 일 (사람 개입)</td>
+<td>수 분 (자동 파이프라인)</td>
+</tr>
+<tr>
+<td>커버리지</td>
+<td>엔지니어 직관에 제한</td>
+<td>체계적 + 철저</td>
+</tr>
+<tr>
+<td>재현성</td>
+<td>낮음 — 개인에 의존</td>
+<td>높음 — 결정적 파이프라인</td>
+</tr>
+<tr>
+<td>수렴 감지</td>
+<td>주관적 판단</td>
+<td>정량적 기준</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../sim2real-gap/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Sim-to-Real 갭 정량화">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Sim-to-Real 갭 정량화
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../wfm-era/" class="md-footer__link md-footer__link--next" aria-label="Next: WFM 시대의 SimOps">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                WFM 시대의 SimOps
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 SimOps
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/your-org/simops" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

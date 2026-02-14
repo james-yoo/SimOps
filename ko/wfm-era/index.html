@@ -1,0 +1,1355 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="SimOps — Simulation Operations for Robotics">
+      
+      
+      
+        <link rel="canonical" href="https://james-yoo.github.io/simops/ko/wfm-era/">
+      
+      
+        <link rel="prev" href="../curriculum-hardening/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>WFM 시대의 SimOps - SimOps</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#wfm-simops" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="SimOps" class="md-header__button md-logo" aria-label="SimOps" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SimOps
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              WFM 시대의 SimOps
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../en/overview/" class="md-tabs__link">
+          
+  
+  
+  English
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../overview/" class="md-tabs__link">
+          
+  
+  
+  한국어
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SimOps" class="md-nav__button md-logo" aria-label="SimOps" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SimOps
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/sim2real-gap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sim-to-Real Gap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/curriculum-hardening/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curriculum & Hardening
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/wfm-era/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SimOps in the WFM Era
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    한국어
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    한국어
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개요
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    아키텍처
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sim2real-gap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sim-to-Real 갭 정량화
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../curriculum-hardening/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    커리큘럼 & 경화
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WFM 시대의 SimOps
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WFM 시대의 SimOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#world-foundation-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        World Foundation Model이란?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wfm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WFM의 약속
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        왜 SimOps가 더 중요해지는가
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="왜 SimOps가 더 중요해지는가">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        검증 갭의 확대
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simops-wfm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SimOps 가치가 WFM과 함께 커지는 세 가지 이유
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SimOps 가치가 WFM과 함께 커지는 세 가지 이유">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 블랙박스 정책은 독립적 검증이 필요하다
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 더 빠른 생산 = 더 많은 검증 처리량 필요
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 규제 및 안전 요구사항은 사라지지 않는다
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simops_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        범용 검증 레이어로서의 SimOps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        대체가 아닌 공존
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        장기 비전: 인증 및 컴플라이언스
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#world-foundation-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        World Foundation Model이란?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wfm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WFM의 약속
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        왜 SimOps가 더 중요해지는가
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="왜 SimOps가 더 중요해지는가">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        검증 갭의 확대
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simops-wfm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SimOps 가치가 WFM과 함께 커지는 세 가지 이유
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SimOps 가치가 WFM과 함께 커지는 세 가지 이유">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 블랙박스 정책은 독립적 검증이 필요하다
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 더 빠른 생산 = 더 많은 검증 처리량 필요
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 규제 및 안전 요구사항은 사라지지 않는다
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simops_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        범용 검증 레이어로서의 SimOps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        대체가 아닌 공존
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        장기 비전: 인증 및 컴플라이언스
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="wfm-simops">WFM 시대의 SimOps<a class="headerlink" href="#wfm-simops" title="Permanent link">&para;</a></h1>
+<h2 id="world-foundation-model">World Foundation Model이란?<a class="headerlink" href="#world-foundation-model" title="Permanent link">&para;</a></h2>
+<p>World Foundation Model(WFM) — World Action Model(WAM)로도 불림 — 은 물리 상호작용, 비디오, 센서 데이터의 대규모 데이터셋으로 학습된 생성형 모델입니다. 물리 세계의 동작을 예측하는 법을 학습하여, 정책 학습을 위한 전통적 물리 시뮬레이터를 대체하거나 보강할 수 있습니다.</p>
+<p>주요 플레이어로는 NVIDIA(Cosmos), Google DeepMind(Genie), 그리고 조작 및 이동에 특화된 파운데이션 모델을 구축하는 다양한 로보틱스 스타트업이 있습니다.</p>
+<h2 id="wfm">WFM의 약속<a class="headerlink" href="#wfm" title="Permanent link">&para;</a></h2>
+<p>WFM은 로봇 정책 생산을 혁신할 것을 약속합니다:</p>
+<ul>
+<li><strong>제로샷 일반화</strong> — 명시적 학습 없이 다양한 환경에서 작동하는 정책</li>
+<li><strong>학습된 물리</strong> — 시뮬레이션 파라미터 수동 튜닝 불필요</li>
+<li><strong>대규모 사전 학습</strong> — 인터넷 규모 데이터를 활용한 세계 이해</li>
+<li><strong>빠른 정책 생성</strong> — 자연어나 시연으로부터 후보 행동 생성</li>
+</ul>
+<h2 id="simops">왜 SimOps가 <em>더</em> 중요해지는가<a class="headerlink" href="#simops" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">흔한 오해</p>
+<p>"WFM이 정책을 직접 생성할 수 있으면, 시뮬레이션이 더 이상 필요 없다."</p>
+<p>이것은 잘못된 생각입니다. <strong>WFM은 학습 시뮬레이터를 대체하지, 검증 시뮬레이터를 대체하지 않습니다.</strong> 정책 생산이 더 빨라지고 덜 투명해질수록, 물리 기반 검증의 필요성은 오히려 <em>증가</em>합니다.</p>
+</div>
+<h3 id="_1">검증 갭의 확대<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>flowchart LR
+    subgraph Before["전통적 RL 시대"]
+        T1[학습 시뮬레이터&lt;br/&gt;MuJoCo] --&gt; V1[검증&lt;br/&gt;선택적]
+        V1 --&gt; H1[하드웨어]
+    end
+
+    subgraph After["WFM 시대"]
+        W1[World Foundation Model&lt;br/&gt;정책 생성] --&gt; V2[검증 시뮬레이터&lt;br/&gt;필수]
+        V2 --&gt; H2[하드웨어]
+    end
+
+    style V1 stroke:#f90,stroke-width:2px
+    style V2 stroke:#f00,stroke-width:3px</code></pre>
+<p>정책이 WFM에서 올 때:</p>
+<table>
+<thead>
+<tr>
+<th>측면</th>
+<th>전통적 RL</th>
+<th>WFM 생성</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>정책 출처</td>
+<td>명시적 보상 + 물리 시뮬</td>
+<td>학습된 세계 모델</td>
+</tr>
+<tr>
+<td>투명성</td>
+<td>보상 함수 검사 가능</td>
+<td>블랙박스 생성</td>
+</tr>
+<tr>
+<td>실패 모드</td>
+<td>시뮬 가정에서 예측 가능</td>
+<td>새롭고 예상치 못한</td>
+</tr>
+<tr>
+<td>생산 속도</td>
+<td>느림 (정책당 수 시간/일)</td>
+<td>빠름 (정책당 수 분)</td>
+</tr>
+<tr>
+<td>검증 필요성</td>
+<td>중요</td>
+<td><strong>필수</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="simops-wfm">SimOps 가치가 WFM과 함께 커지는 세 가지 이유<a class="headerlink" href="#simops-wfm" title="Permanent link">&para;</a></h3>
+<h4 id="1">1. 블랙박스 정책은 독립적 검증이 필요하다<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<p>전통적 RL 정책은 명시적 보상 함수가 있는 물리 시뮬레이터에서 학습됩니다. 정책이 무엇에 최적화되었는지 검사할 수 있습니다. WFM 생성 정책은 학습된 세계 모델의 출력물이며, 검사할 명시적 보상 함수가 없고, "물리"는 모델이 데이터에서 학습한 것이 전부입니다.</p>
+<p><strong>SimOps는 WFM 출력물이 필요로 하는 독립적이고 물리 기반의 검증 레이어를 제공합니다.</strong></p>
+<h4 id="2">2. 더 빠른 생산 = 더 많은 검증 처리량 필요<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
+<p>WFM이 하루 1개 대신 시간당 100개의 후보 정책을 생성할 수 있다면, 검증 병목이 크리티컬 패스가 됩니다. SimOps가 이 병목을 자동화합니다:</p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph Traditional["전통적"]
+        T1["1 정책/일"] --&gt; T2["수동 검증 가능"]
+    end
+
+    subgraph WFM["WFM 시대"]
+        W1["100 정책/시간"] --&gt; W2["자동화된 검증 필수"]
+        W2 -.-&gt;|"해결"| SimOps["SimOps"]
+    end
+
+    style SimOps fill:#90EE90,stroke:#333,stroke-width:2px</code></pre>
+<h4 id="3">3. 규제 및 안전 요구사항은 사라지지 않는다<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<p>로봇이 안전 필수 애플리케이션(제조, 의료, 자율주행)으로 진입할수록, 규제 기관은 정책이 어떻게 생산되었든 <strong>감사 가능하고 재현 가능한 검증</strong>을 요구할 것입니다.</p>
+<p>WFM은 이를 제공할 수 없습니다. 결정적 재생이 가능한 물리 기반 검증 시뮬레이터는 가능합니다.</p>
+<h2 id="simops_1">범용 검증 레이어로서의 SimOps<a class="headerlink" href="#simops_1" title="Permanent link">&para;</a></h2>
+<p>SimOps는 <strong>정책 출처에 무관하게</strong> 작동하도록 설계되었습니다. 정책이 어디서 오든:</p>
+<ul>
+<li>전통적 RL (MuJoCo, Isaac Lab)</li>
+<li>World Foundation Models (Cosmos, Genie)</li>
+<li>모방 학습 (Imitation Learning)</li>
+<li>인간 시연 (Human Demonstration)</li>
+<li>하이브리드 접근법</li>
+</ul>
+<p>...동일한 검증 파이프라인에 진입하고 동일한 물리 기반 품질 게이트를 통과해야 합니다.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph Sources["정책 소스 (진화 중)"]
+        RL[전통적 RL]
+        WFM[World Foundation Models]
+        IL[모방 학습]
+        HD[인간 시연]
+    end
+
+    subgraph SimOps["SimOps 검증 (불변)"]
+        VS[검증 시뮬레이터&lt;br/&gt;AGX + UE5]
+        SA[시나리오 테스트]
+        FA[실패 분석]
+        VS --&gt; SA --&gt; FA
+    end
+
+    subgraph Deploy["배포"]
+        HW[하드웨어]
+        RPT[컴플라이언스 리포트]
+    end
+
+    RL --&gt; VS
+    WFM --&gt; VS
+    IL --&gt; VS
+    HD --&gt; VS
+    FA --&gt;|통과| HW
+    FA --&gt;|통과| RPT
+    FA --&gt;|실패| Sources</code></pre>
+<h2 id="_2">대체가 아닌 공존<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>SimOps는 명확한 입장을 취합니다: <strong>WFM과 물리 기반 검증은 공존합니다.</strong></p>
+<table>
+<thead>
+<tr>
+<th>레이어</th>
+<th>현재</th>
+<th>WFM 시대</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>정책 생산</td>
+<td>물리 시뮬에서의 RL</td>
+<td>WFM (주력) + RL (특화)</td>
+</tr>
+<tr>
+<td>검증</td>
+<td>종종 생략됨</td>
+<td><strong>SimOps</strong> (자동화, 필수)</td>
+</tr>
+<tr>
+<td>배포</td>
+<td>수동 테스트</td>
+<td>감사 추적이 있는 자동화된 승격</td>
+</tr>
+</tbody>
+</table>
+<p>정책 생산이 더 강력하고 불투명해질수록, 투명하고 물리 기반의 검증은 더 중요해집니다. <strong>SimOps는 WFM의 경쟁자가 아닌, 필수적인 보완재로 포지셔닝됩니다.</strong></p>
+<h2 id="_3">장기 비전: 인증 및 컴플라이언스<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>로보틱스 산업이 성숙해짐에 따라, SimOps 검증은 자연스럽게 <strong>인증 및 컴플라이언스</strong>로 확장됩니다:</p>
+<ul>
+<li>특정 로봇 카테고리를 위한 <strong>표준화된 테스트 시나리오</strong></li>
+<li>규제 제출을 위한 <strong>재현 가능한 검증 리포트</strong></li>
+<li>배포된 정책에 대한 <strong>지속적 컴플라이언스 모니터링</strong></li>
+<li>Sim-to-Real 전이 품질에 대한 <strong>산업 벤치마크</strong></li>
+</ul>
+<p>이는 SimOps를 단순한 개발 도구가 아닌, 로보틱스 산업의 품질 보증 생태계를 위한 인프라로 자리매김하게 합니다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../curriculum-hardening/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 커리큘럼 &amp; 경화">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                커리큘럼 & 경화
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 SimOps
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/your-org/simops" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
