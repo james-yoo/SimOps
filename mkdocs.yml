@@ -41,10 +41,14 @@ nav:
   - English:
     - Overview: en/overview.md
     - Architecture: en/architecture.md
+    - Sim-to-Real Gap: en/sim2real-gap.md
+    - Curriculum & Hardening: en/curriculum-hardening.md
     - SimOps in the WFM Era: en/wfm-era.md
   - 한국어:
     - 개요: ko/overview.md
     - 아키텍처: ko/architecture.md
+    - Sim-to-Real 갭 정량화: ko/sim2real-gap.md
+    - 커리큘럼 & 경화: ko/curriculum-hardening.md
     - WFM 시대의 SimOps: ko/wfm-era.md
 
 markdown_extensions:
